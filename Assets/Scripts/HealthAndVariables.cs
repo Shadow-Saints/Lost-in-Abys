@@ -59,7 +59,10 @@ public class HealthAndVariables : MonoBehaviour
 
     public void UpdateSliders()
     {
-        HealthSlider.value = Health ;
+        if (HealthSlider != null)
+        {
+            HealthSlider.value = Health;
+        }
         //HungerSlider.value = Hunger / MaxHunger;
         //ThirstSlider.value = Thirst / MaxThirst;
     }
@@ -88,5 +91,10 @@ public class HealthAndVariables : MonoBehaviour
         {
             Debug.LogWarning("FUDEU!");
         }
+    }
+
+    public void GetSliders()
+    {
+        HealthSlider = FindFirstObjectByType<Slider>();
     }
 }

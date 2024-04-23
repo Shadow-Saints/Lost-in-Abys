@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         healthAndVariables = FindAnyObjectByType<HealthAndVariables>();
+        GameController.instance.loadMenuState();
     }
 
     private void Update()
@@ -108,6 +109,11 @@ public class Player : MonoBehaviour
         
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, _mouseRotation.x, transform.eulerAngles.z);
         _cameraPosition.localEulerAngles = new Vector3(-_mouseRotation.y, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
+    }
+
+    public void ChangeSense(float sense)
+    {
+        _sense = sense;
     }
 
     #endregion

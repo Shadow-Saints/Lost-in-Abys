@@ -68,10 +68,11 @@ public class Save : MonoBehaviour
         IDbCommand insertHudCommand = db.CreateCommand();
         string commandText = "INSERT OR REPLACE INTO HUD(id, value, show) VALUES("+ id.ToString() + "," + value + "," + show +");";
         insertHudCommand.CommandText = commandText;
+        Debug.Log(commandText);
         insertHudCommand.ExecuteNonQuery();
         Close();
     }
-
+    
     public IDataReader ReadHudValues(int id)
     {
         db = CreateAndOpenDatabase();

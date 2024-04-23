@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Valvula : MonoBehaviour
 {
+    #region Variables
+
     [Header("ID")]
     [SerializeField] private int valveID;
 
@@ -24,8 +26,14 @@ public class Valvula : MonoBehaviour
     [Header("Save")]
     private Save save;
 
+    [Header("Others")]
+    [SerializeField] private Valvula[] _othersActive;
+    [SerializeField] private Valvula[] _othersDisable;
+
+    #endregion
+
     #region Unity Callbacks
-    
+
     private void Start()
     {
         save = FindAnyObjectByType<Save>();
@@ -76,26 +84,61 @@ public class Valvula : MonoBehaviour
 
     private void ChangeState()
     {
-        if (!_active && !multiply)
+        if (!_active)
+        {
+            _active = true;
+        }
+        else
+        {
+            _active = false;
+        }
+        CheckOttersActive();
+    }
+
+    public bool returnState()
+    {
+        return _active;
+    }
+
+    private void CheckOttersActive()
+    {
+        for (int i = 0; i < _othersActive.Length; i++)
+        {
+            if (!_othersActive[i].returnState())
+            {
+                Debug.Log("Inactive");
+               return;
+            }
+        }
+        if (_active)
         {
             GameController.instance.SomarPresaoo(_pressionDiference);
-            _active = true;
         }
-        else if (_active && !multiply && _subtract) 
+        else
         {
-            _active = false;
             GameController.instance.SomarPresaoo(-_pressionDiference);
-        }else if (!_active && multiply)
-        {
-            GameController.instance.MultiplicarPresaoo(_pressionDiference);
-            _active = true;
-        }
-        else if (_active && multiply && _subtract)
-        {
-            GameController.instance.DividirPresaoo(_pressionDiference);
-            _active = false;
         }
         
+    }
+
+    private void CheckOttersDiabled()
+    {
+        for (int i = 0; i < _othersActive.Length; i++)
+        {
+            if (_othersActive[i].returnState())
+            {
+                Debug.Log("active");
+                return;
+            }
+        }
+        if (_active)
+        {
+            GameController.instance.SomarPresaoo(_pressionDiference);
+        }
+        else
+        {
+            GameController.instance.SomarPresaoo(-_pressionDiference);
+        }
     }
 
     #endregion
