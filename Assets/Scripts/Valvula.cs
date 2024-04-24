@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class Valvula : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class Valvula : MonoBehaviour
     [Header("Others")]
     [SerializeField] private Valvula[] _othersActive;
     [SerializeField] private Valvula[] _othersDisable;
+
+    [SerializeField]private Animator _animator;
 
     #endregion
 
@@ -74,10 +78,10 @@ public class Valvula : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && _mouseEnter)
         {
             ChangeState();
-
+            
         }
     }
-
+     
     #endregion
 
     #region States
@@ -87,10 +91,15 @@ public class Valvula : MonoBehaviour
         if (!_active)
         {
             _active = true;
+            _animator.SetBool("Abre", true);
+            _animator.SetBool("Fecha", false);
+            StartCoroutine(whait1second());
         }
         else
         {
             _active = false;
+            _animator.SetBool("Fecha", true);
+            _animator.SetBool("Abre", false);
         }
         CheckOttersActive();
     }
@@ -158,6 +167,18 @@ public class Valvula : MonoBehaviour
             GameController.instance.SomarPresaoo(_pressionDiference);
         }
     }
+
+    #endregion
+
+    #region Anim
+
+    private IEnumerator whait1second() 
+    {
+        yield return new WaitForSeconds(0.5f);
+        _animator.SetBool("Abre", false);
+        _animator.SetBool("Fecha", false);
+    }
+
 
     #endregion
 }

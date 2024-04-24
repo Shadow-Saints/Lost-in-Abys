@@ -37,6 +37,10 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
         healthAndVariables = FindAnyObjectByType<HealthAndVariables>();
         GameController.instance.loadMenuState();
+        GameController.instance.getBarText();
+        GameController.instance.LoadPression();
+        GameController.instance.getMenuConfig();
+        GameController.instance.Textinho();
     }
 
     private void Update()
@@ -48,6 +52,12 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -118,4 +128,22 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    public void SaveButton()
+    {
+        GameController.instance.SaveGame();
+    }
+
+    public void ResumeGame()
+    {
+        GameController.instance.Resume();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void PauseGame()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        GameController.instance.Pause();
+    }
+
+    
 }

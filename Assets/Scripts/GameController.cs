@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Data;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public delegate void saveGame();
-    
+
     public static event saveGame OnsavedGame;
 
     public delegate void ChangeMenu();
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private float sense;
 
-    [SerializeField] private TextMeshProUGUI _barText;
+    [SerializeField] private TextMeshPro _barText;
 
     [SerializeField] private TextMeshProUGUI[] _tutorialText;
 
@@ -34,17 +35,21 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private string sceneName;
 
+    private GameObject config;
+
+    private GameObject InicialText;
+
 
     #region UnityCallBacks
     private void Awake()
     {
         DontDestroyOnLoad(this);
 
-        if (instance == null) 
+        if (instance == null)
         {
             instance = this;
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -64,17 +69,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.L)) 
-        {
-            if(OnsavedGame != null)
-            {
-                OnsavedGame();
-            }
-        }
-    }
-
     #endregion
 
     #region Pression
@@ -83,7 +77,7 @@ public class GameController : MonoBehaviour
         barUnit += atm;
         _barText.text = barUnit.ToString();
     }
-    
+
     public void MultiplicarPresaoo(float atm)
     {
         barUnit *= atm;
@@ -109,11 +103,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void LoadPression()
+    public void LoadPression()
     {
         Save save = GetComponent<Save>();
         IDataReader read = save.ReadHudValues(0);
-        while (read.Read()) 
+        while (read.Read())
         {
             barUnit = read.GetFloat(1);
         }
@@ -123,6 +117,11 @@ public class GameController : MonoBehaviour
         {
             _barText.text = barUnit.ToString();
         }
+    }
+
+    public void SaveGame()
+    {
+        OnsavedGame();
     }
 
     #endregion
@@ -142,7 +141,7 @@ public class GameController : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(sceneName);
-        _barText = FindFirstObjectByType<TextMeshProUGUI>();
+
         HealthAndVariables health = FindFirstObjectByType<HealthAndVariables>();
         health.GetSliders();
     }
@@ -155,9 +154,9 @@ public class GameController : MonoBehaviour
     public void changeSense()
     {
         Slider slider = GameObject.FindGameObjectWithTag("Sense Menu").GetComponent<Slider>();
-        
+
         sense = slider.value;
-        if (sense > 200f) 
+        if (sense > 200f)
         {
             sense = 200f;
         }
@@ -175,8 +174,8 @@ public class GameController : MonoBehaviour
         {
             Debug.LogWarning("FUDEU!");
         }
-    } 
-    
+    }
+
     private void SaveFov()
     {
         Save save = GetComponent<Save>();
@@ -196,7 +195,7 @@ public class GameController : MonoBehaviour
     {
         Slider fovSlider = GameObject.FindGameObjectWithTag("Fov Menu").GetComponent<Slider>();
         _fov = fovSlider.value;
-        if (_fov > 100f) 
+        if (_fov > 100f)
         {
             _fov = 100f;
         }
@@ -226,9 +225,9 @@ public class GameController : MonoBehaviour
             Debug.LogError("Camera has not founded");
         }
 
-       
-    } 
-    
+
+    }
+
     private void LoadSense()
     {
         Save save = GetComponent<Save>();
@@ -240,7 +239,7 @@ public class GameController : MonoBehaviour
         }
         save.Close();
 
-        
+
 
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
@@ -253,7 +252,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Player has not founded");
         }
 
-        
+
     }
 
     public void changeMenuState()
@@ -263,7 +262,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator whait1mili()
     {
-       yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
     }
 
     public void loadMenuState()
@@ -291,5 +290,44 @@ public class GameController : MonoBehaviour
             sliderF.value = _fov;
         }
     }
+
+    public void Pause()
+    {
+
+        if (config == null) { Debug.LogError("FUDEUDEVEZ"); }
+        config.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        config.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void getBarText()
+    {
+        _barText = FindFirstObjectByType<TextMeshPro>();
+    }
+
+    public void getMenuConfig()
+    {
+        config = GameObject.FindGameObjectWithTag("Pause").GameObject();
+        config.SetActive(false);
+    }
+
+    public void Textinho()
+    {
+        InicialText = GameObject.FindWithTag("TUTORIAL").GameObject();
+        InicialText.SetActive(true);
+        StartCoroutine(whait15());
+    }
+    
+    private IEnumerator whait15()
+    {
+        yield return new WaitForSeconds(10f);
+        InicialText.SetActive(false );
+    }
+
     #endregion
 }
