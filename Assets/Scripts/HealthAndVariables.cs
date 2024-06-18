@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HealthAndVariables : MonoBehaviour
 {
+
+    #region Variables
+
     [Header("Player Health")]
     public float MaxHealth = 100f;
     public float Health;
@@ -22,6 +25,9 @@ public class HealthAndVariables : MonoBehaviour
     public float ThirstOT;
     public Slider ThirstSlider;
 
+    #endregion
+
+    #region Unity Callbacks
     private void Start()
     {
         if(LoadLife() <= 0)
@@ -46,6 +52,10 @@ public class HealthAndVariables : MonoBehaviour
         }*/
     }
 
+    #endregion
+
+    #region Damege
+
     public void TakeFallDamage()
     {
 
@@ -57,6 +67,10 @@ public class HealthAndVariables : MonoBehaviour
         Health -= Damege;
     }
 
+    #endregion
+
+    #region Sliders
+
     public void UpdateSliders()
     {
         if (HealthSlider != null)
@@ -66,6 +80,15 @@ public class HealthAndVariables : MonoBehaviour
         //HungerSlider.value = Hunger / MaxHunger;
         //ThirstSlider.value = Thirst / MaxThirst;
     }
+
+    public void GetSliders()
+    {
+        HealthSlider = FindFirstObjectByType<Slider>();
+    }
+
+    #endregion
+
+    #region Save and Load
 
     private float LoadLife()
     {
@@ -77,8 +100,8 @@ public class HealthAndVariables : MonoBehaviour
         }
 
         return 0;
-
     }
+   
     private void SaveLife()
     {
         Save save = FindAnyObjectByType<Save>();
@@ -93,8 +116,6 @@ public class HealthAndVariables : MonoBehaviour
         }
     }
 
-    public void GetSliders()
-    {
-        HealthSlider = FindFirstObjectByType<Slider>();
-    }
+    #endregion
+    
 }
