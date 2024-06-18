@@ -28,6 +28,21 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
     private bool _isGrounded;
 
+    [Header("Dialogue System")]
+    private bool canInteract;
+
+    private float interactionDistance = 2.0f;
+
+    DialogueSystem dialogueSystem;
+    NPCManager npcManager;
+
+    Vector2 velocity = Vector2.zero;
+
+    public void EnableInteraction()
+    {
+        canInteract = true;
+        Debug.Log("Interação habilitada novamente."); // Adiciona esta linha
+    }
 
     #region Unity Callbacks
     private void Start()
@@ -58,6 +73,33 @@ public class Player : MonoBehaviour
             PauseGame();
         }
 
+
+
+        /*DIALOGUE SYSTEM
+         Beta Implementation*/
+
+        if (dialogueSystem.GetState() == STATE.DISABLED)
+        {
+            float inputX = Input.GetAxisRaw("Horizontal");
+            float inputY = Input.GetAxisRaw("Vertical");
+
+            velocity = new Vector2(inputX, inputY).normalized * _speed;
+
+            transform.position += (Vector3)velocity * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && canInteract)
+        {
+            NPCData closestNPC = npcManager.GetClosestNPC(transform.position, interactionDistance);
+            if (closestNPC.npc != null)
+            {
+                canInteract = false;
+                dialogueSystem.StartDialogue(closestNPC.dialogueData);
+                Debug.Log("Iniciando diálogo com NPC: " + closestNPC.npc.name);
+            }
+        }
+
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,6 +116,22 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void Awake()
+    {
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
+        npcManager = FindObjectOfType<NPCManager>();
+
+        if (dialogueSystem == null)
+            Debug.LogError("DialogueSystem não encontrado! Verifique se está presente na cena.");
+        else
+            Debug.Log("DialogueSystem encontrado.");
+
+        if (npcManager == null)
+            Debug.LogError("NPCManager não encontrado! Verifique se está presente na cena.");
+        else
+            Debug.Log("NPCManager encontrado.");
     }
 
     #endregion
