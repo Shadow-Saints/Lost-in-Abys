@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    #region Variables
     [Header ("InterConnections")]
     private HealthAndVariables healthAndVariables;
 
@@ -15,12 +18,13 @@ public class Player : MonoBehaviour
     private Vector3 _velocity;
     [SerializeField]private float _speed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _gravity;
 
     [Header ("Camera Movement")]
     [SerializeField] private Transform _cameraPosition;
     [SerializeField]private float _sense;
     private Vector3 _mouseRotation;
-    [SerializeField]private float _gravity;
+    
 
     [Header ("Ground Check")]
     [SerializeField] private Transform _grounCheck;
@@ -28,6 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
     private bool _isGrounded;
 
+    #endregion
 
     #region Unity Callbacks
     private void Start()
@@ -36,11 +41,15 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         healthAndVariables = FindAnyObjectByType<HealthAndVariables>();
-        GameController.instance.loadMenuState();
-        GameController.instance.getBarText();
-        GameController.instance.LoadPression();
-        GameController.instance.getMenuConfig();
-        GameController.instance.Textinho();
+        if (GameController.instance != null)
+        {
+            GameController.instance.loadMenuState();
+            GameController.instance.getBarText();
+            GameController.instance.GetPression();
+            GameController.instance.getMenuConfig();
+            GameController.instance.GetInitialText();
+            transform.Translate(GameController.instance.GetPlayerPosition());
+        }
     }
 
     private void Update()
@@ -55,7 +64,7 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
+            GameController.instance.Pause();
         }
 
     }
@@ -128,6 +137,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Save and Load
     public void SaveButton()
     {
         GameController.instance.SaveGame();
@@ -136,14 +146,12 @@ public class Player : MonoBehaviour
     public void ResumeGame()
     {
         GameController.instance.Resume();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void PauseGame()
+    #endregion
+
+    private void getPosition() 
     {
-        Cursor.lockState = CursorLockMode.None;
-        GameController.instance.Pause();
-    }
 
-    
+    }
 }

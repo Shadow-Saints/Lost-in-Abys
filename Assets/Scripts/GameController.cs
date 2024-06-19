@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Data;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +11,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    #region Variables
     public delegate void saveGame();
 
     public static event saveGame OnsavedGame;
@@ -39,6 +42,7 @@ public class GameController : MonoBehaviour
 
     private GameObject InicialText;
 
+    #endregion
 
     #region UnityCallBacks
     private void Awake()
@@ -57,18 +61,48 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        LoadPression();
-        OnsavedGame += SalvarPressao;
+        GetPression();
+        OnsavedGame += SavePression;
         OnChangeMenu += SaveFov;
         OnChangeMenu += SaveSense;
         OnLoadMenu += LoadFov;
         OnLoadMenu += LoadSense;
+        OnsavedGame += SavePlayerPosition;
 
         LoadFov();
         LoadSense();
 
     }
 
+    #endregion
+
+    #region Positions 
+    private void SavePlayerPosition()
+    {
+        Player player = FindAnyObjectByType<Player>();
+        Vector3 playerPosition = player.transform.position;
+        float x = playerPosition.x;
+        float y = playerPosition.y;
+        float z = playerPosition.z;
+        Save save = FindAnyObjectByType<Save>();
+        save.UpdatePossitionValues(0, x, y, z);
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        Vector3 positions = new Vector3(0, 6.251f, 0);
+        Save save = GetComponent<Save>();
+        IDataReader read = save.ReadPossition(0);
+        while (read.Read())
+        {
+            positions.x = read.GetFloat(1);
+            positions.y = read.GetFloat(2);
+            positions.z = read.GetFloat(3);
+        }
+        
+        return positions;
+        
+    }
     #endregion
 
     #region Pression
@@ -89,7 +123,7 @@ public class GameController : MonoBehaviour
         _barText.text = barUnit.ToString();
     }
 
-    private void SalvarPressao()
+    private void SavePression()
     {
         Save save = GetComponent<Save>();
         if (save != null)
@@ -103,7 +137,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void LoadPression()
+    public void GetPression()
     {
         Save save = GetComponent<Save>();
         IDataReader read = save.ReadHudValues(0);
@@ -162,6 +196,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void changeFov()
+    {
+        Slider fovSlider = GameObject.FindGameObjectWithTag("Fov Menu").GetComponent<Slider>();
+        _fov = fovSlider.value;
+        if (_fov > 100f)
+        {
+            _fov = 100f;
+        }
+    }
+
+    #region Save and Load
     private void SaveSense()
     {
         Save save = GetComponent<Save>();
@@ -191,15 +236,8 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void changeFov()
-    {
-        Slider fovSlider = GameObject.FindGameObjectWithTag("Fov Menu").GetComponent<Slider>();
-        _fov = fovSlider.value;
-        if (_fov > 100f)
-        {
-            _fov = 100f;
-        }
-    }
+
+
 
     private void LoadFov()
     {
@@ -240,16 +278,18 @@ public class GameController : MonoBehaviour
         save.Close();
 
 
-
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-        if (player != null)
+        if (SceneManager.GetActiveScene().name == "Jogo")
         {
-            player.ChangeSense(sense);
-        }
-        else
-        {
-            Debug.Log("Player has not founded");
+            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.ChangeSense(sense);
+            }
+            else
+            {
+                Debug.LogError("Player has not founded");
+            }
         }
 
 
@@ -293,7 +333,7 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
-
+        Cursor.lockState = CursorLockMode.None;
         if (config == null) { Debug.LogError("FUDEUDEVEZ"); }
         config.SetActive(true);
         Time.timeScale = 0f;
@@ -301,6 +341,7 @@ public class GameController : MonoBehaviour
 
     public void Resume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         config.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -313,21 +354,28 @@ public class GameController : MonoBehaviour
     public void getMenuConfig()
     {
         config = GameObject.FindGameObjectWithTag("Pause").GameObject();
-        config.SetActive(false);
+        if (config != null)
+        {
+            config.SetActive(false);
+        }
     }
 
-    public void Textinho()
+    public void GetInitialText()
     {
         InicialText = GameObject.FindWithTag("TUTORIAL").GameObject();
-        InicialText.SetActive(true);
-        StartCoroutine(whait15());
+        if (InicialText != null)
+        {
+            InicialText.SetActive(true);
+            StartCoroutine(whait15());
+        }
     }
-    
+
     private IEnumerator whait15()
     {
         yield return new WaitForSeconds(10f);
-        InicialText.SetActive(false );
+        InicialText.SetActive(false);
     }
 
+    #endregion
     #endregion
 }
