@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: DialogueData 1
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: Senhora
+    text: "Boa Noite querida, queria saber se voc\xEA pegou um jogo de tabuleiro,
+      ele \xE9 meu, e gostaria de peg\xE1-lo de volta."
+  - name: Akemi
+    text: "ah, certo vou pegar, gostaria de entrar, est\xE1 chovendo bastante agora"
+  - name: Senhora
+    text: adoraria senhorita.
+  - name: Akemi
+    text: 'Senhora como a senhora achou esse tabuleiro, ele parece bem diferente
+      do habitual '
+  - name: Senhora
+    text: "o jogo \xE9 bem simples de entender, gostaria de jogar uma partida para
+      testar ele?"
