@@ -32,9 +32,29 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
     private bool _isGrounded;
 
+
+    [Header("Dialogue System")]
+    private bool canInteract;
+
+    private float interactionDistance = 2.0f;
+
+    DialogueSystem dialogueSystem;
+    NPCManager npcManager;
+
+    Vector2 velocity = Vector2.zero;
+
+
     #endregion
 
     #region Unity Callbacks
+
+
+    public void EnableInteraction()
+    {
+        canInteract = true;
+        Debug.Log("Interação habilitada novamente."); // Adiciona esta linha
+    }
+
     private void Start()
     {
         _charController = GetComponent<CharacterController>();
