@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,27 +10,39 @@ public class Player : MonoBehaviour
 {
 
     #region Variables
-    [Header ("InterConnections")]
+    [Header("InterConnections")]
     private HealthAndVariables healthAndVariables;
 
-    [Header ("Movement")]
+    [Header("Movement")]
     private CharacterController _charController;
     private Vector3 _velocity;
-    [SerializeField]private float _speed;
+    [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _gravity;
 
-    [Header ("Camera Movement")]
+    [Header("Camera Movement")]
     [SerializeField] private Transform _cameraPosition;
-    [SerializeField]private float _sense;
+    [SerializeField] private float _sense;
     private Vector3 _mouseRotation;
-    
 
-    [Header ("Ground Check")]
+
+    [Header("Ground Check")]
     [SerializeField] private Transform _grounCheck;
     [SerializeField] private float _groundDistance;
     [SerializeField] private LayerMask _groundMask;
     private bool _isGrounded;
+
+    [Header("Dialogue")]
+    DialogueSystem dialogueSystem;
+    NPCManager npcManager;
+    bool canInteract = true;
+    private float interactionDistance = 20.0f;
+
+    public void EnableInteraction()
+    {
+        canInteract = true;
+        Debug.Log("Interação habilitada novamente.");
+    }
 
     #endregion
 
@@ -52,9 +64,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
+        npcManager = FindObjectOfType<NPCManager>();
+    }
+
     private void Update()
     {
-        CameraMove();
+        if (dialogueSystem.GetState() == STATE.DISABLED)
+        { 
+            CameraMove();
+        }
+
         Gravity();
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -62,7 +84,7 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameController.instance.Pause();
         }
@@ -74,7 +96,8 @@ public class Player : MonoBehaviour
         if (collision.collider.CompareTag("Spike"))
         {
             healthAndVariables.Damege(10);
-        }if (collision.collider.CompareTag("Heal"))
+        }
+        if (collision.collider.CompareTag("Heal"))
         {
             healthAndVariables.Damege(-10);
         }
@@ -82,7 +105,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (dialogueSystem.GetState() == STATE.DISABLED)
+        {
+            Move();
+        }
     }
 
     #endregion
@@ -92,11 +118,26 @@ public class Player : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal") * _speed;
         float moveY = Input.GetAxis("Vertical") * _speed;
-        
-        Vector3 move = transform.right * moveX * Time.deltaTime+ transform.forward * moveY * Time.deltaTime;
+
+        Vector3 move = transform.right * moveX * Time.deltaTime + transform.forward * moveY * Time.deltaTime;
 
         _charController.Move(move);
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (canInteract)
+            {
+                NPCData closestNPC = npcManager.GetClosestNPC(transform.position, interactionDistance);
+                if (closestNPC.npc != null)
+                {
+                    if (closestNPC.npc.CompareTag("NPC"))
+                    {
+                        canInteract = false;
+                        dialogueSystem.StartDialogue(closestNPC.dialogueData);
+                    }
+                }
+            }
+        }
     }
     void Gravity()
     {
@@ -119,13 +160,13 @@ public class Player : MonoBehaviour
 
     #region Camera Movement
 
-    void CameraMove() 
+    void CameraMove()
     {
         Vector3 mousePos = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f);
         _mouseRotation = new Vector3(_mouseRotation.x + mousePos.x * _sense * Time.deltaTime, _mouseRotation.y + mousePos.y * _sense * Time.deltaTime, 0);
 
         _mouseRotation.y = Mathf.Clamp(_mouseRotation.y, -20, 80);
-        
+
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, _mouseRotation.x, transform.eulerAngles.z);
         _cameraPosition.localEulerAngles = new Vector3(-_mouseRotation.y, _cameraPosition.localEulerAngles.y, _cameraPosition.localEulerAngles.z);
     }
@@ -150,7 +191,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    private void getPosition() 
+    private void getPosition()
     {
 
     }
