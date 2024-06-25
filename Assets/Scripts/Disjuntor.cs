@@ -7,7 +7,7 @@ public class Disjuntor : MonoBehaviour
     #region Variables
     [Header("States")]
     [SerializeField]private bool _isActive;
-    private Material _material;
+    [SerializeField]private Material _material;
 
     [Header("Time and Order")]
     private bool _isIniciated;
@@ -27,7 +27,7 @@ public class Disjuntor : MonoBehaviour
         {
             Debug.LogWarning("Energy screen not founded !");
         }
-        _material = GetComponent<Renderer>().material;
+        
         EnergyScreen.OnPuzzleReset += ResetThis;
     }
 
@@ -70,7 +70,7 @@ public class Disjuntor : MonoBehaviour
                 _Energyscreen.StopEnergyPuzzle();
                 StartCoroutine(whait());
             }
-            _material.color = Color.white;
+            _material.color = Color.green;
             _isActive = true;
         }
     }
