@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Pista Primeiro numero
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: Admirador Secreto
+    text: "Espero que esta carta o encontre bem. Desde que soube de sua fascina\xE7\xE3o
+      pelo mundo subaqu\xE1tico, senti-me compelido a compartilhar uma descoberta
+      intrigante que certamente despertar\xE1 ainda mais seu interesse. "
+  - name: Admirador Secreto
+    text: "Imagine criaturas misteriosas do mar, como o tubar\xE3o-de-6-guelras.
+      Este magn\xEDfico predador n\xE3o apenas possui uma presen\xE7a imponente,
+      mas tamb\xE9m \xE9 dotado de exatamente seis guelras, uma adapta\xE7\xE3o singular
+      que o ajuda a sobreviver nas profundezas oce\xE2nicas."
+  - name: Admirador Secreto
+    text: "A complexidade e a beleza desse animal s\xE3o verdadeiramente cativantes,
+      assim como sua dedica\xE7\xE3o ao mist\xE9rio das profundezas. Espero que essa
+      curiosidade subaqu\xE1tica lhe traga um sorriso e alimente sua paix\xE3o pelo
+      desconhecido."

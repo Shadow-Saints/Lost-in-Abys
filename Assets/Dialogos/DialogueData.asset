@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: DialogueData
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: '!#@$!$%&'
+    text: "Oi, voc\xEA! Est\xE1 pronto para um jogo emocionante? Eu escondi as dicas
+      para o pr\xF3ximo andar em lugares muito espec\xEDficos. Para fazer o elevador
+      funcionar, voc\xEA precisa encontrar os pap\xE9is e anotar os n\xFAmeros neles.
+      Ent\xE3o, voc\xEA coloca esses n\xFAmeros nos disjuntores na ordem certa. Aqui
+      vai a pista:"
+  - name: Local do Primeiro Numero
+    text: "O primeiro n\xFAmero est\xE1 na mesa do refeit\xF3rio. Olhe bem, n\xE3o
+      se distraia com as manchas de molho!"
+  - name: Local do Segundo Numero
+    text: "O segundo n\xFAmero est\xE1 na sala do computador. Se voc\xEA tiver sorte,
+      o monitor ainda pode estar ligado."
+  - name: Local do Terceiro Numero
+    text: "O terceiro n\xFAmero est\xE1 no quarto. N\xE3o mexa nas minhas coisas!\n"
+  - name: Local do Quarto Numero
+    text: "O quarto n\xFAmero est\xE1 nas paredes perto dos canos. Cuidado para n\xE3o
+      se molhar!\n"
+  - name: Local do Quinto Numero
+    text: "O quinto n\xFAmero est\xE1 na sala no final do corredor. O que voc\xEA
+      acha que vai encontrar l\xE1?\n"
+  - name: Local do Sexto Numero
+    text: "O sexto n\xFAmero est\xE1 em um banco no refeitorio, cuidado com ele,
+      serio mesmo, se possivel n\xE3o leia ele felipe...\n"
+  - name: '!#@$!$%&'
+    text: "Agora, se voc\xEA for esperto o suficiente para decifrar isso tudo, talvez
+      encontre algo interessante no pr\xF3ximo andar. Ou talvez n\xE3o. Quem sabe?"

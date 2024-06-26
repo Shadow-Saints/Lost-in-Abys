@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     DialogueSystem dialogueSystem;
     NPCManager npcManager;
     bool canInteract = true;
-    private float interactionDistance = 20.0f;
+    [SerializeField] private float interactionDistance = 25.0f;
 
     public void EnableInteraction()
     {
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
 
         _charController.Move(move);
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (canInteract)
             {

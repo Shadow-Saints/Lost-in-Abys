@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Pista Quato Numero
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: Admirador Secreto
+    text: "Espero que esta carta o encontre bem. Desde que soube de sua fascina\xE7\xE3o
+      pelo mundo subaqu\xE1tico, senti-me compelido a compartilhar uma descoberta
+      que certamente ir\xE1 encantar voc\xEA."
+  - name: Admirador Secreto
+    text: "Imagine uma criatura marinha not\xE1vel que possui 5 bra\xE7os distintos,
+      cada um delicadamente movendo-se como se dan\xE7asse nas correntes oce\xE2nicas."
+  - name: Admirador Secreto
+    text: "Estou falando do fascinante e elegante l\xEDrio-do-mar (Crinoidea), cuja
+      beleza e gra\xE7a s\xE3o t\xE3o extraordin\xE1rias quanto sua anatomia \xFAnica."
+  - name: Admirador Secreto
+    text: "Os l\xEDrios-do-mar, com seus bra\xE7os radiantes e habilidades de camuflagem
+      surpreendentes, s\xE3o verdadeiros artistas do fundo do mar, adicionando um
+      toque de magia aos recifes e abismos onde habitam. Espero que essa curiosidade
+      s\xF3 aumente sua admira\xE7\xE3o pelo mundo subaqu\xE1tico e suas maravilhas
+      escondidas."
