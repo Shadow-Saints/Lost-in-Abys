@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
-  m_Name: DialogueData 2
+  m_Name: awdwadaw
   m_EditorClassIdentifier: 
   talkScript:
-  - name: Henrique
-    text: 'EU AMO JOGR LOL '
-  - name: Kayke
-    text: "Voc\xEA mudou henrique"
-  - name: Henrique
-    text: HAHAHAHHAAH
+  - name: dawdaw
+    text: awdawdsad
+  - name: dfgssgfs
+    text: fdgsdfgsfg

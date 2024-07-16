@@ -1,4 +1,4 @@
-// DialogueSystem.cs
+ï»¿// DialogueSystem.cs
 using UnityEngine;
 
 public enum STATE
@@ -58,7 +58,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueUI.Enable();
         Next();
 
-        Debug.Log("Diálogo iniciado.");
+        Debug.Log("DiÃ¡logo iniciado.");
     }
 
     public void Next()
@@ -98,7 +98,6 @@ public class DialogueSystem : MonoBehaviour
                 currentText = 0;
                 finished = false;
 
-                // Reactivar a capacidade de interação no PlayerMovement
                 FindObjectOfType<Player>().EnableInteraction();
             }
         }

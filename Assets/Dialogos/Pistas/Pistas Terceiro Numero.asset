@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Pistas Terceiro Numero
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: Admirador Secreto
+    text: "Espero que esta carta o encontre bem. Desde que descobri sua admira\xE7\xE3o
+      pelo mundo subaqu\xE1tico, senti a necessidade de compartilhar uma curiosidade
+      singular que certamente ir\xE1 cativar sua imagina\xE7\xE3o."
+  - name: Admirador Secreto
+    text: "Imagine uma criatura marinha t\xE3o extraordin\xE1ria que possui apenas
+      1 olho. Sim, estou falando do peixe Cyclops (Bathyopsis), que habita as profundezas
+      abissais do oceano."
+  - name: Admirador Secreto
+    text: "Este peixe incomum n\xE3o apenas desafia nossa compreens\xE3o com seu
+      singularidade, mas tamb\xE9m nos lembra das maravilhas e mist\xE9rios das profundezas."
+  - name: Admirador Secreto
+    text: "A simplicidade e a complexidade combinadas nessa adapta\xE7\xE3o s\xE3o
+      verdadeiramente fascinantes, refletindo a diversidade surpreendente da vida
+      submarina. Espero que essa curiosidade desperte ainda mais seu fasc\xEDnio
+      pelo desconhecido mundo subaqu\xE1tico."

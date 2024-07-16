@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Eletrico.unity
     guid: d21466cc07a72b345a60d1f2cffda0e9
+  - enabled: 1
+    path: Assets/Scenes/Primeiro Andar.unity
+    guid: 7eea920c32a41c14da982220f7a8f633
   m_configObjects: {}

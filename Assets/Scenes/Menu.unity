@@ -1799,7 +1799,7 @@ MonoBehaviour:
   - {fileID: 1861026240}
   - {fileID: 424887105}
   barUnit: 1
-  sceneName: Novo Mapa
+  sceneName: Primeiro Andar
 --- !u!4 &1240587007
 Transform:
   m_ObjectHideFlags: 0

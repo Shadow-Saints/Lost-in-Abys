@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Pista Sexto Numero
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: ???
+    text: Finalmente descobrir para quem meus trabalhos estavam indo
+  - name: ???
+    text: "Cara, voc\xEA n\xE3o vai acreditar na raiva que t\xF4 sentindo aqui! A
+      ESDB, t\xE1 acabando com tudo! Prometeram cuidar dos nossos oceanos, mas s\xF3
+      vejo desastre e desculpas furadas."
+  - name: ???
+    text: "Aquelas \xE1guas lindas e agora tudo estragado! \xD3leo, destrui\xE7\xE3o...,
+      a ultima vez que eu vi a \xE1gua de perto ela tava vermelha, o que eles t\xE3o
+      fazendo ????"
+  - name: ???
+    text: "Mas, calma, lembrei de algo que vai te interessar, man! Sabia que tem
+      um bicho l\xE1 no fundo com s\xF3 2 olhos, mas enxerga melhor que a gente na
+      escurid\xE3o? \xC9 tipo um super-her\xF3i marinho"
+  - name: ???
+    text: "E sabe o que mais? Descobri seu nome, Felipe! Voc\xEA \xE9 aquele cara
+      que sempre admirei como um super-her\xF3i, mesmo agindo das sombras eu sempre
+      quis te conhecer pela sua paix\xE3o pelo mar e por lutar pelo que \xE9 certo."
+  - name: ???
+    text: "Mas no final, eu descobrir o que voc\xEA fez, eu finalmente vou acabar
+      com a pessoa que come\xE7ou tudo isso"
+  - name: ???
+    text: "Eu fiz uma criatura modificada geneticamente para aguentar o que fizeram
+      com a \xE1gua. mas ela \xE9 uma abomina\xE7\xE3o genetica, nada \xE9 capaz
+      de matar ela, mas agora eu garanto "
+  - name: ???
+    text: "ELA VAI TE CA\xC7AR"
