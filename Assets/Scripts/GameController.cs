@@ -348,7 +348,8 @@ public class GameController : MonoBehaviour
 
     public void getBarText()
     {
-        _barText = FindFirstObjectByType<TextMeshPro>();
+        _barText = FindFirstObjectByType<TextMeshPro>(); 
+        Debug.Log(_barText);
     }
 
     public void getMenuConfig()

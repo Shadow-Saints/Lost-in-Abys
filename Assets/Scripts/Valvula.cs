@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 public class Valvula : MonoBehaviour
 {

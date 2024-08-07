@@ -12,6 +12,7 @@ TagManager:
   - Pause
   - TUTORIAL
   - NPC
+  - Object
   layers:
   - Default
   - TransparentFX

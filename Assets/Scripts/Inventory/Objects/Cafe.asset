@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7243f279ccab51d48b376cd445e715bb, type: 3}
+  m_Name: Cafe
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 7876da5e447df5745a2c31bcf4bda5e2, type: 3}
+  name: "Caf\xE9"
+  type: Food
+  description: "Quero Caf\xE9\xE9\xE9\xE9\xE9!!!"
