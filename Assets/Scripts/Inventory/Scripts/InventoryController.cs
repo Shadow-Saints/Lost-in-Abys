@@ -1,5 +1,6 @@
         using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class InventoryController : MonoBehaviour
     public InventoryObject[] slots;
     public Image[] slotsImages;
     public int[] slotAmount;
+    [SerializeField] private TextMeshProUGUI _itemText;
 
     private void Update()
     {
@@ -21,11 +23,13 @@ public class InventoryController : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+                Time.timeScale = 0f;
             }
             else 
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Time.timeScale = 1.0f;
             }            
         }
 
@@ -35,21 +39,26 @@ public class InventoryController : MonoBehaviour
         {
             if (hit.collider.tag == "Object")
             {
-                if (Input.GetKeyDown(KeyCode.G))
+                _itemText.text = $"Precione (E) para coletar {hit.transform.GetComponent<Colectable>().Object.name}";
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     for (int i = 0; i < slots.Length; i++)
                     {
                         if (slots[i] == null || slots[i].name == hit.transform.GetComponent<Colectable>().Object.name)
                         {
                             slots[i] = hit.transform.GetComponent<Colectable>().Object;
-                            slotAmount[i] ++;
+                            slotAmount[i]++;
                             slotsImages[i].sprite = slots[i].Sprite;
                             Destroy(hit.transform.gameObject);
                             break;
                         }
-                        
+
                     }
                 }
+            }
+            else 
+            {
+                _itemText.text = null;
             }
         }
     }
