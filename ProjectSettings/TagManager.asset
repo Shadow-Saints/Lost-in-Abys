@@ -13,6 +13,8 @@ TagManager:
   - TUTORIAL
   - NPC
   - Object
+  - Volume
+  - Config
   layers:
   - Default
   - TransparentFX
