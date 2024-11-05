@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Data;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -42,6 +45,9 @@ public class GameController : MonoBehaviour
 
     private GameObject InicialText;
 
+    private float _volume;
+
+
     #endregion
 
     #region UnityCallBacks
@@ -64,14 +70,22 @@ public class GameController : MonoBehaviour
         GetPression();
         OnsavedGame += SavePression;
         OnChangeMenu += SaveFov;
+        OnChangeMenu += SaveVolume;
         OnChangeMenu += SaveSense;
         OnLoadMenu += LoadFov;
         OnLoadMenu += LoadSense;
+        OnLoadMenu += LoadVolume;
         OnsavedGame += SavePlayerPosition;
 
         LoadFov();
         LoadSense();
+        LoadVolume();
 
+        GameObject config = GameObject.FindGameObjectWithTag("Config");
+        if (config != null)
+        {
+            config.SetActive(false);
+        }
     }
 
     #endregion
@@ -196,6 +210,19 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void changeVolume()
+    {
+        Slider slider = GameObject.FindGameObjectWithTag("Volume").GetComponent<Slider>();
+
+        _volume = slider.value;
+        if (_volume > 100f)
+        {
+            sense = 100f;
+        }
+
+        AudioListener.volume = _volume;
+    }
+
     public void changeFov()
     {
         Slider fovSlider = GameObject.FindGameObjectWithTag("Fov Menu").GetComponent<Slider>();
@@ -237,9 +264,44 @@ public class GameController : MonoBehaviour
     }
 
 
+    private void SaveVolume()
+    {
+        Debug.Log("Saved");
+        Save save = GetComponent<Save>();
+        if (save != null)
+        {
+            save.UpdateHudValues(4, _volume, true);
+            Debug.Log("Volume " + _volume);
+            save.Close();
+        }
+        else
+        {
+            Debug.LogWarning("FUDEU!");
+        }
+    }
+
+    private void LoadVolume()
+    {
+        CultureInfo global = CultureInfo.InvariantCulture;
+        Debug.Log("Loaded");
+
+        Slider _volumeSlider = GameObject.FindGameObjectWithTag("Volume").GetComponent<Slider>();
+        if (_volumeSlider == null) { Debug.LogError("Fudeu"); }
+        Save save = GetComponent<Save>();
+        IDataReader read = save.ReadHudValues(4);
+        while (read.Read())
+        {
+            _volume = read.GetFloat(1);
+            _volumeSlider.value = _volume;
+            AudioListener.volume = _volume;
+            Debug.Log("Volume: " + _volume);
+        }
+        save.Close();
+
+    }
 
 
-    private void LoadFov()
+       private void LoadFov()
     {
         Save save = GetComponent<Save>();
         IDataReader read = save.ReadHudValues(3);
