@@ -7774,7 +7774,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &900029644
 MonoBehaviour:
@@ -7815,6 +7815,18 @@ MonoBehaviour:
   - {fileID: 815312866}
   - {fileID: 1605732806}
   - {fileID: 4964407}
+  - {fileID: 1285489898}
+  - {fileID: 1929399831}
+  - {fileID: 727405242}
+  - {fileID: 1976532574}
+  - {fileID: 113720555}
+  - {fileID: 1934977742}
+  - {fileID: 4964407}
+  - {fileID: 1605732806}
+  - {fileID: 815312866}
+  - {fileID: 1410658089}
+  - {fileID: 221922150}
+  - {fileID: 1226103495}
   slotAmount: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   _itemText: {fileID: 195153411}
 --- !u!4 &900029645
