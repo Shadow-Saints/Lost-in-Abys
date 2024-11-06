@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: "Fus\xEDveis"
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: eu
+    text: "Essa carga el\xE9trica tem propriedades de mat\xE9ria escura\u2026 Isso
+      \xE9 muito suspeito. O gerador de mat\xE9ria escura afundou para o outro lado;
+      alguma coisa injetou isso nos cabos. Ser\xE1 que est\xE3o tentando me matar?\r\n"

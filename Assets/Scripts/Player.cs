@@ -1,15 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     #region Variables
+
     [Header("InterConnections")]
     private HealthAndVariables healthAndVariables;
 
@@ -25,7 +20,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sense;
     private Vector3 _mouseRotation;
 
-
     [Header("Ground Check")]
     [SerializeField] private Transform _grounCheck;
     [SerializeField] private float _groundDistance;
@@ -36,7 +30,7 @@ public class Player : MonoBehaviour
     DialogueSystem dialogueSystem;
     NPCManager npcManager;
     bool canInteract = true;
-    [SerializeField] private float interactionDistance = 25.0f;
+    [SerializeField] private float interactionDistance = 3.0f;
 
     public void EnableInteraction()
     {
@@ -47,33 +41,30 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Unity Callbacks
+
     private void Start()
     {
         _charController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         healthAndVariables = FindAnyObjectByType<HealthAndVariables>();
-        if (GameController.instance != null)
-        {
-            GameController.instance.loadMenuState();
-            GameController.instance.getBarText();
-            GameController.instance.GetPression();
-            GameController.instance.getMenuConfig();
-            GameController.instance.GetInitialText();
-            transform.Translate(GameController.instance.GetPlayerPosition());
-        }
+
+        Debug.Log("Player Start: Configuração inicializada.");
     }
 
     private void Awake()
     {
         dialogueSystem = FindObjectOfType<DialogueSystem>();
         npcManager = FindObjectOfType<NPCManager>();
+
+        if (dialogueSystem == null) Debug.LogWarning("DialogueSystem não encontrado.");
+        if (npcManager == null) Debug.LogWarning("NPCManager não encontrado.");
     }
 
     private void Update()
     {
         if (dialogueSystem.GetState() == STATE.DISABLED)
-        { 
+        {
             CameraMove();
         }
 
@@ -89,18 +80,7 @@ public class Player : MonoBehaviour
             GameController.instance.Pause();
         }
 
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Spike"))
-        {
-            healthAndVariables.Damege(10);
-        }
-        if (collision.collider.CompareTag("Heal"))
-        {
-            healthAndVariables.Damege(-10);
-        }
+        Interact();
     }
 
     private void FixedUpdate()
@@ -114,31 +94,16 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Movement
+
     void Move()
     {
         float moveX = Input.GetAxis("Horizontal") * _speed;
         float moveY = Input.GetAxis("Vertical") * _speed;
 
         Vector3 move = transform.right * moveX * Time.deltaTime + transform.forward * moveY * Time.deltaTime;
-
         _charController.Move(move);
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (canInteract)
-            {
-                NPCData closestNPC = npcManager.GetClosestNPC(transform.position, interactionDistance);
-                if (closestNPC.npc != null)
-                {
-                    if (closestNPC.npc.CompareTag("NPC"))
-                    {
-                        canInteract = false;
-                        dialogueSystem.StartDialogue(closestNPC.dialogueData);
-                    }
-                }
-            }
-        }
     }
+
     void Gravity()
     {
         _isGrounded = Physics.CheckSphere(_grounCheck.position, _groundDistance, _groundMask);
@@ -156,6 +121,65 @@ public class Player : MonoBehaviour
     {
         _velocity.y = Mathf.Sqrt(_jumpForce * _gravity * -2f);
     }
+
+    #endregion
+
+    #region Interaction
+
+    // Método para interação com portas e keypad
+    void Interact()
+    {
+        if (!canInteract) return;
+
+        // Tenta encontrar o NPC mais próximo usando a posição do jogador e a distância de interação
+        NPCData closestNPC = npcManager.GetClosestNPC(transform.position, interactionDistance);
+
+        // Verifica se o NPC mais próximo foi encontrado e se está dentro do alcance de interação
+        if (closestNPC.npc != null && Vector3.Distance(transform.position, closestNPC.npc.transform.position) <= interactionDistance)
+        {
+            Debug.Log($"NPC próximo encontrado: {closestNPC.npc.name}");
+
+            // Inicia o diálogo com o NPC mais próximo
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                dialogueSystem.StartDialogue(closestNPC.dialogueData);
+                canInteract = false;
+                Debug.Log("Iniciando diálogo com o NPC.");
+            }
+        }
+        else
+        {
+            Debug.Log("Nenhum NPC próximo para interação.");
+        }
+
+        // Interação com objetos como portas e teclados
+        RaycastHit hit;
+        if (Physics.Raycast(_cameraPosition.position, _cameraPosition.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            Debug.DrawRay(_cameraPosition.position, _cameraPosition.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+            if (distance <= interactionDistance)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (hit.transform.GetComponent<KeypadKey>() != null)
+                    {
+                        Debug.Log("Interagindo com o teclado.");
+                        hit.transform.GetComponent<KeypadKey>().SendKey();
+                    }
+                    else if (hit.transform.GetComponent<Door>() != null)
+                    {
+                        Debug.Log("Interagindo com a porta.");
+                        hit.transform.GetComponent<Door>().OpenDoor();
+                    }
+                }
+            }
+        }
+    }
+
+
+
     #endregion
 
     #region Camera Movement
@@ -177,18 +201,4 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-
-    #region Save and Load
-    public void SaveButton()
-    {
-        GameController.instance.SaveGame();
-    }
-
-    public void ResumeGame()
-    {
-        GameController.instance.Resume();
-    }
-
-    #endregion
-
 }

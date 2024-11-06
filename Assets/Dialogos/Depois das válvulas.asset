@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: "Depois das v\xE1lvulas"
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: eu
+    text: "Um quebra-cabe\xE7a simples para uma mente brilhante. A \xFAnica coisa
+      estranha nesse caso \xE9 o motivo de estarem quebrados. Alguma coisa teria
+      que ter destru\xEDdo os canos reguladores, mas eles ficam na parte submersa
+      da esta\xE7\xE3o... imposs\xEDvel. A morte brilha mais que a luz neste abismo"

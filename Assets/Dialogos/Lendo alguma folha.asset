@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Lendo alguma folha
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: eu
+    text: "Um relat\xF3rio? n\xE3o tinha visto esse ainda."
+  - name: eu
+    text: "O n\xEDvel tr\xF3fico de 75% dos ecossistemas est\xE1 decaindo drasticamente.
+      Acreditamos que isso se deve \xE0s nuvens negras formadas pelas f\xE1bricas
+      de V.I52. Essa subst\xE2ncia, quando em contato com a \xE1gua por 7 dias, pode
+      gerar um g\xE1s escuro cujos efeitos s\xE3o perigosos para humanos e outras
+      formas de vida. Esse g\xE1s bloqueia a luz solar, resultando em uma diminui\xE7\xE3o
+      significativa na produtividade tr\xF3fica."
+  - name: eu
+    text: "Nossa solu\xE7\xE3o \xE9 o projeto Viridi Lux: estamos desenvolvendo um
+      organismo capaz de se alimentar de V.I52. Esse ser\xE1 o primeiro ser vivo
+      capaz de consumir um produto derivado de mat\xE9ria escura, representando uma
+      revolu\xE7\xE3o em todo o mundo.\n"
+  - name: eu
+    text: "Esse projeto tinha tanto potencial\u2026 Pena que deu errado. A falta
+      de recursos e de tempo acabou gerando apenas dois indiv\xEDduos. Que desperd\xEDcio\u2026
+      Eles morreram com apenas tr\xEAs minutos de vida e foram descartados no mar.
+      Talvez, se tiv\xE9ssemos sido mais cuidadosos com o descarte, o mundo n\xE3o
+      estaria um caos"

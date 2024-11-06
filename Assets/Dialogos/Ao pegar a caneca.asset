@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Ao pegar a caneca
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: eu
+    text: "Essa can\xE7\xE3o me traz tantas lembran\xE7as..."
+  - name: eu
+    text: "Foi o Le\xF4nidas quem me deu de presente quando fui promovido. Lembro
+      dele dizendo: \u2018Essa vai ser minha cara se o novo chefe me encher o saco\u2019.
+      Ele era um cara engra\xE7ado. Ser\xE1 que conseguiu sobreviver l\xE1 fora?"
+  - name: eu
+    text: "Melhor n\xE3o pensar nisso, preciso focar em mim agora.\n"

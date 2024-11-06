@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +8,6 @@ public class KeypadController : MonoBehaviour
     public string password;
     public int passwordLimit;
     public Text passwordText;
-
-
 
     private void Start()
     {
@@ -24,16 +21,15 @@ public class KeypadController : MonoBehaviour
             Clear();
             return;
         }
-        else if(number == "Enter")
+        else if (number == "Enter")
         {
             Enter();
             return;
         }
 
-        int length = passwordText.text.ToString().Length;
-        if(length<passwordLimit)
+        if (passwordText.text.Length < passwordLimit)
         {
-            passwordText.text = passwordText.text + number;
+            passwordText.text += number;
         }
     }
 
@@ -47,10 +43,16 @@ public class KeypadController : MonoBehaviour
     {
         if (passwordText.text == password)
         {
-            // Desbloqueia a porta e chama o método para abri-la
             door.lockedByPassword = false;
-            door.OpenDoor();
 
+            if (door.IsOpen())
+            {
+                door.CloseDoor();
+            }
+            else
+            {
+                door.OpenDoor();
+            }
             passwordText.color = Color.green;
             StartCoroutine(waitAndClear());
         }
@@ -61,12 +63,9 @@ public class KeypadController : MonoBehaviour
         }
     }
 
-
     IEnumerator waitAndClear()
     {
         yield return new WaitForSeconds(0.75f);
         Clear();
     }
-
-
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436170eaba5600146932e56a9ca21ffe, type: 3}
+  m_Name: Cama
+  m_EditorClassIdentifier: 
+  talkScript:
+  - name: eu
+    text: "Foi a Lilian quem me deu esse len\xE7ol, para que eu me sentisse seguro,
+      como se um len\xE7ol pudesse me proteger do mundo real. Mesmo achando isso
+      il\xF3gico e rid\xEDculo, sinto\u2026 sinto muita falta delas e\u2026 espero
+      que estejam bem. Ser\xE1 que o mundo ainda tem salva\xE7\xE3o?\r\n\r\n"

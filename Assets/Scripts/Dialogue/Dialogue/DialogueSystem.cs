@@ -1,5 +1,4 @@
-﻿// DialogueSystem.cs
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum STATE
 {
@@ -26,17 +25,21 @@ public class DialogueSystem : MonoBehaviour
         dialogueUI = FindObjectOfType<DialogueUI>();
 
         typeText.TypeFinished = OnTypeFinished;
+        Debug.Log("DialogueSystem Awake: Componentes TypeTextAnimation e DialogueUI inicializados.");
     }
 
     void Start()
     {
         state = STATE.DISABLED;
+        Debug.Log("DialogueSystem Start: Estado inicial definido como DISABLED.");
     }
 
     void Update()
     {
         if (state == STATE.DISABLED)
             return;
+
+        Debug.Log("DialogueSystem Update: Estado atual - " + state);
 
         switch (state)
         {
@@ -51,6 +54,8 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(DialogueData dialogueData)
     {
+        Debug.Log("Iniciando diálogo com DialogueData: " + dialogueData);
+
         this.dialogueData = dialogueData;
         currentText = 0;
         finished = false;
@@ -63,16 +68,27 @@ public class DialogueSystem : MonoBehaviour
 
     public void Next()
     {
+        if (dialogueData == null || dialogueData.talkScript.Count == 0)
+        {
+            Debug.LogWarning("DialogueData está nulo ou talkScript está vazio.");
+            return;
+        }
+
         if (currentText == 0)
         {
             dialogueUI.Enable();
+            Debug.Log("Diálogo habilitado.");
         }
 
+        Debug.Log("Configurando fala do personagem: " + dialogueData.talkScript[currentText].name);
         dialogueUI.SetName(dialogueData.talkScript[currentText].name);
         typeText.fullText = dialogueData.talkScript[currentText++].text;
 
         if (currentText == dialogueData.talkScript.Count)
+        {
             finished = true;
+            Debug.Log("Último texto do diálogo alcançado.");
+        }
 
         typeText.StartTyping();
         state = STATE.TYPING;
@@ -80,6 +96,7 @@ public class DialogueSystem : MonoBehaviour
 
     void OnTypeFinished()
     {
+        Debug.Log("Texto digitado terminado.");
         state = STATE.WAITING;
     }
 
@@ -87,6 +104,7 @@ public class DialogueSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("Enter pressionado no estado WAITING.");
             if (!finished)
             {
                 Next();
@@ -98,6 +116,7 @@ public class DialogueSystem : MonoBehaviour
                 currentText = 0;
                 finished = false;
 
+                Debug.Log("Diálogo terminado, interação habilitada.");
                 FindObjectOfType<Player>().EnableInteraction();
             }
         }
@@ -107,6 +126,7 @@ public class DialogueSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("Enter pressionado no estado TYPING, pulando animação.");
             typeText.Skip();
             state = STATE.WAITING;
         }
