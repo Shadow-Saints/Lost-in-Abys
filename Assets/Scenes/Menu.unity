@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 42187191}
   m_Layer: 5
   m_Name: Config Panel
-  m_TagString: Config
+  m_TagString: Pause
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1894,6 +1894,7 @@ MonoBehaviour:
   - {fileID: 424887105}
   barUnit: 1
   sceneName: Final
+  config: {fileID: 0}
 --- !u!4 &1240587007
 Transform:
   m_ObjectHideFlags: 0

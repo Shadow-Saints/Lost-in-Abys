@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Player : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class Player : MonoBehaviour
     NPCManager npcManager;
     bool canInteract = true;
     [SerializeField] private float interactionDistance = 3.0f;
+    public PlayableDirector introCutscene;
+ 
+    private bool canControll;
 
     public void EnableInteraction()
     {
@@ -48,6 +52,8 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         healthAndVariables = FindAnyObjectByType<HealthAndVariables>();
+
+        Invoke("EnableControls", (float)introCutscene.duration);
 
         Debug.Log("Player Start: Configuração inicializada.");
     }
@@ -85,7 +91,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (dialogueSystem.GetState() == STATE.DISABLED)
+        if (dialogueSystem.GetState() == STATE.DISABLED && canControll)
         {
             Move();
         }
@@ -120,6 +126,16 @@ public class Player : MonoBehaviour
     void Jump()
     {
         _velocity.y = Mathf.Sqrt(_jumpForce * _gravity * -2f);
+    }
+
+    public void DisableControls() 
+    {
+        canControll = false;
+    }
+
+    public void EnableControls() 
+    {
+        canControll = true;
     }
 
     #endregion

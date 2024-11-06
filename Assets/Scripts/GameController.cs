@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private string sceneName;
 
+    [SerializeField] 
     private GameObject config;
 
     private GameObject InicialText;
@@ -81,7 +82,7 @@ public class GameController : MonoBehaviour
         LoadSense();
         LoadVolume();
 
-        GameObject config = GameObject.FindGameObjectWithTag("Config");
+        GameObject config = GameObject.FindGameObjectWithTag("Pause");
         if (config != null)
         {
             config.SetActive(false);
@@ -340,7 +341,7 @@ public class GameController : MonoBehaviour
         save.Close();
 
 
-        if (SceneManager.GetActiveScene().name == "Jogo")
+        if (SceneManager.GetActiveScene().name == "Final")
         {
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
